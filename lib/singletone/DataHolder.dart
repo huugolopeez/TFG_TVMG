@@ -2,12 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tfg_tvmg/firestoreObjects/FbUsuario.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tfg_tvmg/singletone/HttpAdmin.dart';
 
 class DataHolder {
 
   static final DataHolder _dataHolder = DataHolder._internal();
 
   FirebaseFirestore db = FirebaseFirestore.instance;
+  HttpAdmin httpAdmin = HttpAdmin();
 
   late Color colorFondo;
   late Color colorPrincipal;
