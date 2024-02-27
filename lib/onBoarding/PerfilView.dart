@@ -1,10 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tfg_tvmg/firestoreObjects/FbUsuario.dart';
 
 class PerfilView extends StatelessWidget {
   late BuildContext _context;
   TextEditingController tecUser = TextEditingController();
 
-  void onClickAceptar() {
+  Future<void> onClickAceptar() async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    FbUsuario usuario = FbUsuario(username: tecUser.text, seguidores: 0, seguidos: 0);
+
+    String uidUser = FirebaseAuth.instance.currentUser!.uid;
+    await db
+        .collection("Usuarios")
+        .doc(uidUser)
+        .set(usuario.toFirestore());
+
     Navigator.of(_context).popAndPushNamed('/homeview');
   }
 
