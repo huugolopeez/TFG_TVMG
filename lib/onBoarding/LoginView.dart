@@ -1,9 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginView extends StatelessWidget {
   late BuildContext _context;
+  TextEditingController tecUser = TextEditingController();
+  TextEditingController tecPass = TextEditingController();
 
-  void onClickAceptar() {}
+  throwSnackBar(String error) {
+    SnackBar snackBar = SnackBar(content: Text(error));
+    ScaffoldMessenger.of(_context).showSnackBar(snackBar);
+  }
+
+  Future<void> onClickAceptar() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: tecUser.text,
+          password: tecPass.text
+      );
+      Navigator.of(_context).popAndPushNamed('/splashview');
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+        print(' --> Formato del email incorrecto.');
+        throwSnackBar('-- Formato del email incorrecto --');
+      } else if (e.code == 'invalid-login-credentials') {
+        print(' --> Credenciales incorrectas.');
+        throwSnackBar('-- Credenciales incorrectas --');
+      }
+    }
+  }
 
   void onClickCancelar() {
     Navigator.of(_context).popAndPushNamed('/accountview');
@@ -12,8 +36,6 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _context = context;
-    TextEditingController tecUser = TextEditingController();
-    TextEditingController tecPass = TextEditingController();
 
     return Scaffold(
         backgroundColor: const Color.fromRGBO(38, 41, 43, 1.0),
