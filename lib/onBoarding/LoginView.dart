@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tfg_tvmg/singletone/DataHolder.dart';
 
 class LoginView extends StatelessWidget {
   late BuildContext _context;
@@ -38,11 +39,11 @@ class LoginView extends StatelessWidget {
     _context = context;
 
     return Scaffold(
-        backgroundColor: const Color.fromRGBO(38, 41, 43, 1.0),
+        backgroundColor: DataHolder().colorFondo,
         appBar: AppBar(
             title: const Text('LOGIN'),
             centerTitle: true,
-            backgroundColor: const Color.fromRGBO(95, 122, 219, 1.0)),
+            backgroundColor: DataHolder().colorPrincipal),
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
@@ -89,9 +90,9 @@ class LoginView extends StatelessWidget {
                         onPressed: onClickAceptar,
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                                const Color.fromRGBO(38, 41, 43, 1.0)),
-                            side: MaterialStateProperty.all(const BorderSide(
-                                color: Color.fromRGBO(95, 122, 219, 1.0))),
+                                DataHolder().colorFondo),
+                            side: MaterialStateProperty.all(BorderSide(
+                                color: DataHolder().colorPrincipal)),
                             shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
@@ -108,7 +109,7 @@ class LoginView extends StatelessWidget {
                     onPressed: onClickCancelar,
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            const Color.fromRGBO(95, 122, 219, 1.0)),
+                            DataHolder().colorPrincipal),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(

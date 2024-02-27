@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tfg_tvmg/singletone/DataHolder.dart';
 
 class ExistAccount extends StatelessWidget {
 
@@ -17,7 +18,7 @@ class ExistAccount extends StatelessWidget {
     _context = context;
 
     return Scaffold(
-        backgroundColor: const Color.fromRGBO(38, 41, 43, 1.0),
+        backgroundColor: DataHolder().colorFondo,
         bottomNavigationBar: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -30,9 +31,9 @@ class ExistAccount extends StatelessWidget {
                       onPressed: onClickLogin,
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
-                              const Color.fromRGBO(38, 41, 43, 1.0)),
-                          side: MaterialStateProperty.all(const BorderSide(
-                              color: Color.fromRGBO(95, 122, 219, 1.0))),
+                              DataHolder().colorFondo),
+                          side: MaterialStateProperty.all(BorderSide(
+                              color: DataHolder().colorPrincipal)),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
@@ -49,7 +50,7 @@ class ExistAccount extends StatelessWidget {
                   onPressed: onClickRegister,
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                          const Color.fromRGBO(95, 122, 219, 1.0)),
+                          DataHolder().colorPrincipal),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)))),
