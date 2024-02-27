@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 
 class ExistAccount extends StatelessWidget {
 
-  void onClickLogin() {
+  late BuildContext _context;
 
+  void onClickLogin() {
+    Navigator.of(_context).popAndPushNamed('/loginview');
   }
 
   void onClickRegister() {
-
+    Navigator.of(_context).popAndPushNamed('/registerview');
   }
 
   @override
   Widget build(BuildContext context) {
+    _context = context;
 
     return Scaffold(
         backgroundColor: const Color.fromRGBO(38, 41, 43, 1.0),
