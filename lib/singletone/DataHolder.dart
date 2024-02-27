@@ -35,19 +35,22 @@ class DataHolder {
   void saveSelectedUserInCache() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    prefs.setString('userName', selectedUser.nombre);
-    prefs.setInt('userAge', selectedUser.edad);
+    prefs.setString('userName', selectedUser.username);
+    prefs.setInt('userAge', selectedUser.seguidores);
+    prefs.setInt('userAge', selectedUser.seguidos);
   }
 
   void loadCacheFbUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     String? userName = prefs.getString('userName');
-    int? userAge = prefs.getInt('userAge');
+    int? userSeguidores = prefs.getInt('userSeguidores');
+    int? userSeguidos = prefs.getInt('userSeguidos');
 
     userName ??= '';
-    userAge ??= 0;
+    userSeguidores ??= 0;
+    userSeguidos ??= 0;
 
-    selectedUser = FbUsuario(nombre: userName, edad: userAge);
+    selectedUser = FbUsuario(username: userName, seguidores: userSeguidores, seguidos: userSeguidos);
   }
 }
