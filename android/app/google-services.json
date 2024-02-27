@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "825509452770",
+    "project_id": "tvmg-95828",
+    "storage_bucket": "tvmg-95828.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825509452770:android:380de1fc5969215de237bb",
+        "android_client_info": {
+          "package_name": "com.hugo.tfg_tvmg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnk8E68CT0ePrZcnpONfxliEuDLHuqryE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825509452770:android:302e2142cfa91f3ee237bb",
+        "android_client_info": {
+          "package_name": "lopez.hugo.tvmg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnk8E68CT0ePrZcnpONfxliEuDLHuqryE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
