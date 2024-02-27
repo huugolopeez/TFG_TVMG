@@ -2,22 +2,27 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class HttpAdmin {
+  Future<String> fetchAnimeData(String anime) async {
+    String responseBody = '';
 
-  Future<void> fetchAnimeData(String anime) async {
     var url = 'https://api.jikan.moe/v4/anime?q=$anime';
 
     var response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
       // Procesa los datos de respuesta aquí
-      print(response.body);
+      responseBody = response.body;
     } else {
       // Maneja errores de solicitud aquí
       print('Error: ${response.statusCode}');
     }
+
+    return responseBody;
   }
 
-  void processAnimeData(String responseBody) {
+  List<String> processAnimeData(String responseBody) {
+    List<String> titulos = [];
+
     // Analiza el cuerpo de la respuesta JSON
     var jsonData = jsonDecode(responseBody);
 
@@ -26,7 +31,9 @@ class HttpAdmin {
 
     // Por ejemplo, puedes imprimir el título de cada anime en los resultados
     for (var result in results) {
-      print(result['title']);
+      titulos.add(result['title']);
     }
+
+    return titulos;
   }
 }

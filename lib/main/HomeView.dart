@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:tfg_tvmg/custom/TMDrawer.dart';
 import 'package:tfg_tvmg/singletone/DataHolder.dart';
+import 'package:http/http.dart' as http;
+
+import 'BuscadorView.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -17,9 +22,7 @@ class _HomeViewState extends State<HomeView> {
     const Text(
       'Index 1: Business',
     ),
-    const Text(
-      'Index 2: dsa',
-    ),
+    BuscadorView(),
     const Text(
       'Index 3: dsa',
     ),
@@ -27,7 +30,7 @@ class _HomeViewState extends State<HomeView> {
 
   void vistaMenu(int numMenu) {
     setState(() {
-        _numMenu = numMenu;
+      _numMenu = numMenu;
     });
   }
 
@@ -41,10 +44,9 @@ class _HomeViewState extends State<HomeView> {
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent),
       body: Center(
-        child: _widgetOptions[_numMenu]
+          child: _widgetOptions[_numMenu]
       ),
       drawer: TMDrawer(onItemTap: vistaMenu),
     );
   }
 }
-
