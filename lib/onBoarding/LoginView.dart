@@ -18,7 +18,7 @@ class LoginView extends StatelessWidget {
     return Scaffold(
         backgroundColor: const Color.fromRGBO(38, 41, 43, 1.0),
         appBar: AppBar(
-            title: const Text('Login'),
+            title: const Text('LOGIN'),
             centerTitle: true,
             backgroundColor: const Color.fromRGBO(95, 122, 219, 1.0)),
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
