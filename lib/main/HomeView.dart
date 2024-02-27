@@ -8,13 +8,27 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  int numMenu = 0;
+  int _numMenu = 0;
 
-  Widget? vistaMenu(int numMenu) {
-    if (numMenu == 0) {
-    } else if (numMenu == 1) {
-    } else if (numMenu == 2) {
-    } else if (numMenu == 3) {}
+  static final List<Widget> _widgetOptions = <Widget>[
+    const Text(
+      'Index 0: Home',
+    ),
+    const Text(
+      'Index 1: Business',
+    ),
+    const Text(
+      'Index 2: dsa',
+    ),
+    const Text(
+      'Index 3: dsa',
+    ),
+  ];
+
+  void vistaMenu(int numMenu) {
+    setState(() {
+        _numMenu = numMenu;
+    });
   }
 
   @override
@@ -26,8 +40,11 @@ class _HomeViewState extends State<HomeView> {
           centerTitle: true,
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent),
-      body: Center(child: vistaMenu(numMenu)),
+      body: Center(
+        child: _widgetOptions[_numMenu]
+      ),
       drawer: TMDrawer(onItemTap: vistaMenu),
     );
   }
 }
+
