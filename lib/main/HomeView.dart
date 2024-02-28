@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:tfg_tvmg/custom/TMDrawer.dart';
 import 'package:tfg_tvmg/singletone/DataHolder.dart';
-import 'package:http/http.dart' as http;
 
 import 'BuscadorView.dart';
 

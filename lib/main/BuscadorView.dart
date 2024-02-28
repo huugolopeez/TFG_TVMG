@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tfg_tvmg/custom/TMGrid.dart';
+import 'package:tfg_tvmg/firestoreObjects/FbAnimes.dart';
+import 'package:tfg_tvmg/firestoreObjects/FbMangas.dart';
+import 'package:tfg_tvmg/main/PostView.dart';
 import 'package:tfg_tvmg/singletone/DataHolder.dart';
 
 class BuscadorView extends StatefulWidget {
@@ -9,12 +12,16 @@ class BuscadorView extends StatefulWidget {
 
 class _BuscadorViewState extends State<BuscadorView> {
   TextEditingController tecAnime = TextEditingController();
-  List<String> _busquedaTitulosA = [];
-  List<String> _busquedaImagenesA = [];
-  List<String> _busquedaTitulosM = [];
-  List<String> _busquedaImagenesM = [];
+  List<FbAnimes> _busquedaAnimes = [];
+  List<FbMangas> _busquedaMangas = [];
   bool _isLoading = false;
   bool _isAnime = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchAnime(tecAnime.text);
+  }
 
   void animeOrManga(int index) {
     setState(() {
@@ -26,10 +33,15 @@ class _BuscadorViewState extends State<BuscadorView> {
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _searchAnime(tecAnime.text);
+  void onItemTap(int index) {
+    if (_isAnime) {
+      DataHolder().selectedAnime = _busquedaAnimes[index];
+    } else {
+      DataHolder().selectedManga = _busquedaMangas[index];
+    }
+    // DataHolder().saveSelectedPostInCache();
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => PostView(_isAnime)));
   }
 
   @override
@@ -55,7 +67,7 @@ class _BuscadorViewState extends State<BuscadorView> {
                             },
                           ),
                           hoverColor: Colors.white,
-                          border: OutlineInputBorder(),
+                          border: const OutlineInputBorder(),
                           hintText: 'Ingrese el nombre del anime')),
                 )),
             _isLoading
@@ -69,14 +81,14 @@ class _BuscadorViewState extends State<BuscadorView> {
                               crossAxisCount: 4,
                               mainAxisExtent: 400,
                             ),
-                            itemCount: _busquedaTitulosA.length,
+                            itemCount: _busquedaAnimes.length,
                             itemBuilder: (context, index) {
                               return TMGrid(
-                                  sTitle: _busquedaTitulosA[index],
-                                  sBody: _busquedaImagenesA[index],
+                                  sTitle: _busquedaAnimes[index].titulo,
+                                  sBody: _busquedaAnimes[index].urlImagen,
                                   dFontSize: 15,
                                   iPosition: index,
-                                  onItemTap: null);
+                                  onItemTap: onItemTap);
                             }),
                       )
                     : Expanded(
@@ -87,14 +99,14 @@ class _BuscadorViewState extends State<BuscadorView> {
                               crossAxisCount: 4,
                               mainAxisExtent: 400,
                             ),
-                            itemCount: _busquedaTitulosM.length,
+                            itemCount: _busquedaMangas.length,
                             itemBuilder: (context, index) {
                               return TMGrid(
-                                  sTitle: _busquedaTitulosM[index],
-                                  sBody: _busquedaImagenesM[index],
+                                  sTitle: _busquedaMangas[index].titulo,
+                                  sBody: _busquedaMangas[index].urlImagen,
                                   dFontSize: 15,
                                   iPosition: index,
-                                  onItemTap: null);
+                                  onItemTap: onItemTap);
                             }),
                       ),
           ],
@@ -124,15 +136,12 @@ class _BuscadorViewState extends State<BuscadorView> {
       String responseM =
           await DataHolder().httpAdmin.fetchMangaData(tecAnime.text);
 
-      List<String> titulosA = DataHolder().httpAdmin.getTitleAnime(responseA);
-      List<String> imagenesA = DataHolder().httpAdmin.getImagenAnime(responseA);
-      List<String> titulosM = DataHolder().httpAdmin.getTitleAnime(responseM);
-      List<String> imagenesM = DataHolder().httpAdmin.getImagenAnime(responseM);
+      List<FbAnimes> animes = DataHolder().httpAdmin.getAnimeList(responseA);
+      List<FbMangas> mangas = DataHolder().httpAdmin.getMangaList(responseM);
+
       setState(() {
-        _busquedaTitulosA = titulosA;
-        _busquedaImagenesA = imagenesA;
-        _busquedaTitulosM = titulosM;
-        _busquedaImagenesM = imagenesM;
+        _busquedaAnimes = animes;
+        _busquedaMangas = mangas;
       });
     } catch (e) {
       print('Error: $e');

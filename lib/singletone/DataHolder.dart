@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tfg_tvmg/firestoreObjects/FbAnimes.dart';
+import 'package:tfg_tvmg/firestoreObjects/FbMangas.dart';
 import 'package:tfg_tvmg/firestoreObjects/FbUsuario.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tfg_tvmg/singletone/HttpAdmin.dart';
@@ -15,6 +17,8 @@ class DataHolder {
   late Color colorPrincipal;
 
   late FbUsuario selectedUser;
+  late FbAnimes selectedAnime;
+  late FbMangas selectedManga;
 
   DataHolder._internal() {
     initCache();

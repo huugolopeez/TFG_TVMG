@@ -1,6 +1,9 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:tfg_tvmg/firestoreObjects/FbAnimes.dart';
+import 'package:tfg_tvmg/firestoreObjects/FbMangas.dart';
+
 class HttpAdmin {
 
   Future<String> fetchAnimeData(String anime) async {
@@ -39,7 +42,11 @@ class HttpAdmin {
     return responseBody;
   }
 
-  List<String> getTitleAnime(String responseBody) {
+  FbAnimes? getAnime(String responseBody) {
+    return null;
+  }
+
+  List<String> getTitle(String responseBody) {
     List<String> titulos = [];
 
     // Analiza el cuerpo de la respuesta JSON
@@ -56,7 +63,7 @@ class HttpAdmin {
     return titulos;
   }
 
-  List<String> getImagenAnime(String responseBody) {
+  List<String> getImagen(String responseBody) {
     List<String> imagenes = [];
 
     // Analiza el cuerpo de la respuesta JSON
@@ -77,5 +84,59 @@ class HttpAdmin {
     }
 
     return imagenes;
+  }
+
+  List<FbAnimes> getAnimeList(String responseBody) {
+    List<FbAnimes> animeList = [];
+    int id;
+    String titulo;
+    String url;
+
+    // Analiza el cuerpo de la respuesta JSON
+    var jsonData = jsonDecode(responseBody);
+
+    // Accede a los datos que necesitas
+    var results = jsonData['data'];
+
+    for (var anime in results) {
+      id = anime['mal_id'];
+      titulo = anime['title'];
+      if (anime['images'] != null && anime['images']['jpg'] != null) {
+        url = anime['images']['jpg']['image_url'];
+      } else {
+        // Si no hay imágenes disponibles, añade una URL predeterminada o deja en blanco según lo necesites
+        url = 'URL_POR_DEFECTO';
+      }
+      animeList.add(FbAnimes(id: id, titulo: titulo, urlImagen: url));
+    }
+
+    return animeList;
+  }
+
+  List<FbMangas> getMangaList(String responseBody) {
+    List<FbMangas> mangaList = [];
+    int id;
+    String titulo;
+    String url;
+
+    // Analiza el cuerpo de la respuesta JSON
+    var jsonData = jsonDecode(responseBody);
+
+    // Accede a los datos que necesitas
+    var results = jsonData['data'];
+
+    for (var manga in results) {
+      id = manga['mal_id'];
+      titulo = manga['title'];
+      if (manga['images'] != null && manga['images']['jpg'] != null) {
+        url = manga['images']['jpg']['image_url'];
+      } else {
+        // Si no hay imágenes disponibles, añade una URL predeterminada o deja en blanco según lo necesites
+        url = 'URL_POR_DEFECTO';
+      }
+      mangaList.add(FbMangas(id: id, titulo: titulo, urlImagen: url));
+    }
+
+    return mangaList;
   }
 }
