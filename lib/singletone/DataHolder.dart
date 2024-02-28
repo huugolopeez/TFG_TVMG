@@ -42,8 +42,8 @@ class DataHolder {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.setString('userName', selectedUser.username);
-    prefs.setInt('userAge', selectedUser.seguidores);
-    prefs.setInt('userAge', selectedUser.seguidos);
+    prefs.setInt('userSeguidores', selectedUser.seguidores);
+    prefs.setInt('userSeguidos', selectedUser.seguidos);
   }
 
   void loadCacheFbUser() async {

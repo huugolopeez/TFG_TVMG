@@ -4,11 +4,27 @@ class FbMangas {
   final int id;
   final String titulo;
   final String urlImagen;
+  final String? descripcion;
+  final String? estatus;
+  final int? capitulos;
+  final int? volumenes;
+  final String? fechaPublicacion;
+  final String? tipo;
+  final double? puntuacion;
+  final String? autor;
 
   FbMangas(
       {required this.id,
       required this.titulo,
-      required this.urlImagen});
+      required this.urlImagen,
+        this.descripcion,
+        this.estatus,
+        this.capitulos,
+        this.fechaPublicacion,
+        this.tipo,
+        this.volumenes,
+        this.puntuacion,
+        this.autor});
 
   factory FbMangas.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> snapshot,

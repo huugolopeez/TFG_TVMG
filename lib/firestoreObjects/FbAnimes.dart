@@ -4,11 +4,27 @@ class FbAnimes {
   final int id;
   final String titulo;
   final String urlImagen;
+  final String? descripcion;
+  final String? estatus;
+  final int? capitulos;
+  final String? fechaPublicacion;
+  final String? tipo;
+  final List<String>? generos;
+  final double? puntuacion;
+  final String? estudio;
 
   FbAnimes(
       {required this.id,
       required this.titulo,
-      required this.urlImagen});
+      required this.urlImagen,
+        this.descripcion,
+        this.estatus,
+        this.capitulos,
+        this.fechaPublicacion,
+        this.tipo,
+        this.generos,
+        this.puntuacion,
+        this.estudio});
 
   factory FbAnimes.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> snapshot,

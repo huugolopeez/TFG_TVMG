@@ -5,7 +5,6 @@ import 'package:tfg_tvmg/firestoreObjects/FbAnimes.dart';
 import 'package:tfg_tvmg/firestoreObjects/FbMangas.dart';
 
 class HttpAdmin {
-
   Future<String> fetchAnimeData(String anime) async {
     String responseBody = '';
 
@@ -42,78 +41,7 @@ class HttpAdmin {
     return responseBody;
   }
 
-  FbAnimes? getAnime(String responseBody) {
-    return null;
-  }
-
-  List<String> getTitle(String responseBody) {
-    List<String> titulos = [];
-
-    // Analiza el cuerpo de la respuesta JSON
-    var jsonData = jsonDecode(responseBody);
-
-    // Accede a los datos que necesitas
-    var results = jsonData['data'];
-
-    // Por ejemplo, puedes imprimir el título de cada anime en los resultados
-    for (var result in results) {
-      titulos.add(result['title']);
-    }
-
-    return titulos;
-  }
-
-  List<String> getImagen(String responseBody) {
-    List<String> imagenes = [];
-
-    // Analiza el cuerpo de la respuesta JSON
-    var jsonData = jsonDecode(responseBody);
-
-    // Accede a los datos que necesitas
-    var results = jsonData['data'];
-
-    // Por cada anime en los resultados, obtén la URL de la imagen
-    for (var anime in results) {
-      // Verifica si existen datos de imágenes en formato 'jpg'
-      if (anime['images'] != null && anime['images']['jpg'] != null) {
-        imagenes.add(anime['images']['jpg']['image_url']);
-      } else {
-        // Si no hay imágenes disponibles, añade una URL predeterminada o deja en blanco según lo necesites
-        imagenes.add('URL_POR_DEFECTO');
-      }
-    }
-
-    return imagenes;
-  }
-
-  List<FbAnimes> getAnimeList(String responseBody) {
-    List<FbAnimes> animeList = [];
-    int id;
-    String titulo;
-    String url;
-
-    // Analiza el cuerpo de la respuesta JSON
-    var jsonData = jsonDecode(responseBody);
-
-    // Accede a los datos que necesitas
-    var results = jsonData['data'];
-
-    for (var anime in results) {
-      id = anime['mal_id'];
-      titulo = anime['title'];
-      if (anime['images'] != null && anime['images']['jpg'] != null) {
-        url = anime['images']['jpg']['image_url'];
-      } else {
-        // Si no hay imágenes disponibles, añade una URL predeterminada o deja en blanco según lo necesites
-        url = 'URL_POR_DEFECTO';
-      }
-      animeList.add(FbAnimes(id: id, titulo: titulo, urlImagen: url));
-    }
-
-    return animeList;
-  }
-
-  List<FbMangas> getMangaList(String responseBody) {
+  /*List<FbMangas> getMangaList(String responseBody) {
     List<FbMangas> mangaList = [];
     int id;
     String titulo;
@@ -135,6 +63,106 @@ class HttpAdmin {
         url = 'URL_POR_DEFECTO';
       }
       mangaList.add(FbMangas(id: id, titulo: titulo, urlImagen: url));
+    }
+
+    return mangaList;
+  }*/
+
+  List<FbAnimes> getAnimeList(String responseBody) {
+    List<FbAnimes> animeList = [];
+
+    // Analiza el cuerpo de la respuesta JSON
+    var jsonData = jsonDecode(responseBody);
+
+    // Accede a los datos que necesitas
+    var results = jsonData['data'];
+
+    for (var anime in results) {
+      int id = anime['mal_id'];
+      String titulo = anime['title'];
+      String descripcion =
+          anime['synopsis'] ?? ''; // Descripción del anime, si está disponible
+      String urlImagen =
+          anime['images'] != null && anime['images']['jpg'] != null
+              ? anime['images']['jpg']['image_url']
+              : 'URL_POR_DEFECTO'; // URL de la imagen del anime
+      String estatus = anime['status']; // Estatus del anime
+      int? capitulos = anime['episodes']; // Cantidad de capítulos del anime
+      String fechaPublicacion = anime['aired']['from'] ??
+          ''; // Fecha de publicación del anime, si está disponible
+      String tipo = anime['type']; // Tipo de anime
+      List<String> generos = (anime['genres'] as List)
+          .map((genre) => genre['name'].toString())
+          .toList(); // Lista de géneros del anime
+      double puntuacion = anime['score'] ?? 0.0; // Puntuación del anime
+      String estudio = anime['studios'] != null && anime['studios'].isNotEmpty
+          ? anime['studios'][0]['name']
+          : ''; // Estudio del anime
+
+      // Crear objeto FbAnimes y agregarlo a la lista
+      animeList.add(FbAnimes(
+        id: id,
+        titulo: titulo,
+        descripcion: descripcion,
+        urlImagen: urlImagen,
+        estatus: estatus,
+        capitulos: capitulos,
+        fechaPublicacion: fechaPublicacion,
+        tipo: tipo,
+        generos: generos,
+        puntuacion: puntuacion,
+        estudio: estudio,
+      ));
+    }
+
+    return animeList;
+  }
+
+  List<FbMangas> getMangaList(String responseBody) {
+    List<FbMangas> mangaList = [];
+
+    // Analiza el cuerpo de la respuesta JSON
+    var jsonData = jsonDecode(responseBody);
+
+    // Accede a los datos que necesitas
+    var results = jsonData['data'];
+
+    for (var anime in results) {
+      int id = anime['mal_id'];
+      String titulo = anime['title'];
+      String descripcion =
+          anime['synopsis'] ?? ''; // Descripción del manga, si está disponible
+      String urlImagen =
+      anime['images'] != null && anime['images']['jpg'] != null
+          ? anime['images']['jpg']['image_url']
+          : 'URL_POR_DEFECTO'; // URL de la imagen del manga
+      String estatus = anime['status']; // Estatus del manga
+      int? capitulos = anime['chapters']; // Cantidad de capítulos del manga
+      int? volumenes = anime['volumes']; // Cantidad de volumenes del manga
+      String fechaPublicacion = anime['published']['from'] ??
+          ''; // Fecha de publicación del manga, si está disponible
+      String tipo = anime['type']; // Tipo de manga
+      double puntuacion = anime['score'] ?? 0.0; // Puntuación del manga
+      var authors = anime['authors'] as List;
+      String autor = '';
+      for (var author in authors) {
+        autor = author['name'];
+      }
+
+      // Crear objeto FbAnimes y agregarlo a la lista
+      mangaList.add(FbMangas(
+        id: id,
+        titulo: titulo,
+        descripcion: descripcion,
+        urlImagen: urlImagen,
+        estatus: estatus,
+        capitulos: capitulos,
+        volumenes: volumenes,
+        fechaPublicacion: fechaPublicacion,
+        tipo: tipo,
+        puntuacion: puntuacion,
+        autor: autor,
+      ));
     }
 
     return mangaList;
