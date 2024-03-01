@@ -41,33 +41,6 @@ class HttpAdmin {
     return responseBody;
   }
 
-  /*List<FbMangas> getMangaList(String responseBody) {
-    List<FbMangas> mangaList = [];
-    int id;
-    String titulo;
-    String url;
-
-    // Analiza el cuerpo de la respuesta JSON
-    var jsonData = jsonDecode(responseBody);
-
-    // Accede a los datos que necesitas
-    var results = jsonData['data'];
-
-    for (var manga in results) {
-      id = manga['mal_id'];
-      titulo = manga['title'];
-      if (manga['images'] != null && manga['images']['jpg'] != null) {
-        url = manga['images']['jpg']['image_url'];
-      } else {
-        // Si no hay imágenes disponibles, añade una URL predeterminada o deja en blanco según lo necesites
-        url = 'URL_POR_DEFECTO';
-      }
-      mangaList.add(FbMangas(id: id, titulo: titulo, urlImagen: url));
-    }
-
-    return mangaList;
-  }*/
-
   List<FbAnimes> getAnimeList(String responseBody) {
     List<FbAnimes> animeList = [];
 
@@ -133,9 +106,9 @@ class HttpAdmin {
       String descripcion =
           anime['synopsis'] ?? ''; // Descripción del manga, si está disponible
       String urlImagen =
-      anime['images'] != null && anime['images']['jpg'] != null
-          ? anime['images']['jpg']['image_url']
-          : 'URL_POR_DEFECTO'; // URL de la imagen del manga
+          anime['images'] != null && anime['images']['jpg'] != null
+              ? anime['images']['jpg']['image_url']
+              : 'URL_POR_DEFECTO'; // URL de la imagen del manga
       String estatus = anime['status']; // Estatus del manga
       int? capitulos = anime['chapters']; // Cantidad de capítulos del manga
       int? volumenes = anime['volumes']; // Cantidad de volumenes del manga

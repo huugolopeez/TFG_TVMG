@@ -4,6 +4,7 @@ import 'package:tfg_tvmg/firestoreObjects/FbAnimes.dart';
 import 'package:tfg_tvmg/firestoreObjects/FbMangas.dart';
 import 'package:tfg_tvmg/firestoreObjects/FbUsuario.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tfg_tvmg/singletone/FirebaseAdmin.dart';
 import 'package:tfg_tvmg/singletone/HttpAdmin.dart';
 
 class DataHolder {
@@ -12,6 +13,7 @@ class DataHolder {
 
   FirebaseFirestore db = FirebaseFirestore.instance;
   HttpAdmin httpAdmin = HttpAdmin();
+  FirebaseAdmin firebaseAdmin = FirebaseAdmin();
 
   late Color colorFondo;
   late Color colorPrincipal;
