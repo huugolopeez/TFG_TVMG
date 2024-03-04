@@ -6,15 +6,23 @@ import 'package:tfg_tvmg/firestoreObjects/FbMangas.dart';
 import 'DataHolder.dart';
 
 class FirebaseAdmin {
-  Future<QuerySnapshot<FbAnimes>> getPosts() async {
-    CollectionReference<FbAnimes> reference = DataHolder()
-        .db
-        .collection("Animes")
-        .withConverter(
-            fromFirestore: FbAnimes.fromFirestore,
-            toFirestore: (FbAnimes post, _) => post.toFirestore());
+  Future<List<FbAnimes>> getAnimes() async {
+    List<FbAnimes> animes = [];
+    String uidUser = FirebaseAuth.instance.currentUser!.uid;
 
-    return await reference.get();
+    QuerySnapshot<Map<String, dynamic>> animeCollection = await DataHolder()
+        .db
+        .collection('AnimesList')
+        .doc(uidUser)
+        .collection('Animes')
+        .get();
+
+    animeCollection.docs.forEach((element) {
+      FbAnimes anime = FbAnimes.fromFirestore(element, null);
+      animes.add(anime);
+    });
+
+    return animes;
   }
 
   void insertUserAnime(FbAnimes anime) {
@@ -22,7 +30,8 @@ class FirebaseAdmin {
     CollectionReference animeCollection = DataHolder()
         .db
         .collection('AnimesList')
-        .doc(uidUser).collection('Animes');
+        .doc(uidUser)
+        .collection('Animes');
 
     animeCollection.doc('${anime.id}').set(anime.toFirestore());
   }
@@ -32,7 +41,8 @@ class FirebaseAdmin {
     CollectionReference mangaCollection = DataHolder()
         .db
         .collection('MangaList')
-        .doc(uidUser).collection('Mangas');
+        .doc(uidUser)
+        .collection('Mangas');
 
     mangaCollection.doc('${manga.id}').set(manga.toFirestore());
   }
