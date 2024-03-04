@@ -9,7 +9,6 @@ class FbAnimes {
   final int? capitulos;
   final String? fechaPublicacion;
   final String? tipo;
-  final List<String>? generos;
   final double? puntuacion;
   final String? estudio;
 
@@ -22,7 +21,6 @@ class FbAnimes {
         this.capitulos,
         this.fechaPublicacion,
         this.tipo,
-        this.generos,
         this.puntuacion,
         this.estudio});
 
@@ -40,7 +38,14 @@ class FbAnimes {
     return {
       if (id != null) "id": id,
       if (titulo != null) "titulo": titulo,
-      if (urlImagen != null) "urlImagen": urlImagen
+      if (urlImagen != null) "urlImagen": urlImagen,
+      if (descripcion != null) "descripcion": descripcion,
+      if (estatus != null) "estatus": estatus,
+      if (capitulos != null) "capitulos": capitulos,
+      if (fechaPublicacion != null) "fechaPublicacion": fechaPublicacion,
+      if (tipo != null) "tipo": tipo,
+      if (puntuacion != null) "puntuacion": puntuacion,
+      if (estudio != null) "estudio": estudio
     };
   }
 }

@@ -64,9 +64,6 @@ class HttpAdmin {
       String fechaPublicacion = anime['aired']['from'] ??
           ''; // Fecha de publicación del anime, si está disponible
       String tipo = anime['type']; // Tipo de anime
-      List<String> generos = (anime['genres'] as List)
-          .map((genre) => genre['name'].toString())
-          .toList(); // Lista de géneros del anime
       double puntuacion = anime['score'] ?? 0.0; // Puntuación del anime
       String estudio = anime['studios'] != null && anime['studios'].isNotEmpty
           ? anime['studios'][0]['name']
@@ -82,7 +79,6 @@ class HttpAdmin {
         capitulos: capitulos,
         fechaPublicacion: fechaPublicacion,
         tipo: tipo,
-        generos: generos,
         puntuacion: puntuacion,
         estudio: estudio,
       ));

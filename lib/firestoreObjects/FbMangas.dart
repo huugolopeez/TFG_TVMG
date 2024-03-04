@@ -40,7 +40,15 @@ class FbMangas {
     return {
       if (id != null) "id": id,
       if (titulo != null) "titulo": titulo,
-      if (urlImagen != null) "urlImagen": urlImagen
+      if (urlImagen != null) "urlImagen": urlImagen,
+      if (descripcion != null) "descripcion": descripcion,
+      if (estatus != null) "estatus": estatus,
+      if (capitulos != null) "capitulos": capitulos,
+      if (fechaPublicacion != null) "fechaPublicacion": fechaPublicacion,
+      if (tipo != null) "tipo": tipo,
+      if (volumenes != null) "volumenes": volumenes,
+      if (puntuacion != null) "puntuacion": puntuacion,
+      if (autor != null) "autor": autor
     };
   }
 }

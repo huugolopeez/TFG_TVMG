@@ -95,7 +95,7 @@ class _PostViewState extends State<PostView> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Text(DataHolder().selectedAnime.descripcion!,
                         maxLines: 10,
                         style:
@@ -194,7 +194,13 @@ class _PostViewState extends State<PostView> {
                 ],
               ),
         floatingActionButton: FloatingActionButton(
-            onPressed: () { DataHolder().firebaseAdmin.insertUserAnime(DataHolder().selectedAnime); },
+            onPressed: () {
+              if(widget.isAnime) {
+                DataHolder().firebaseAdmin.insertUserAnime(DataHolder().selectedAnime);
+              } else {
+                DataHolder().firebaseAdmin.insertUserManga(DataHolder().selectedManga);
+              }
+              },
             backgroundColor: DataHolder().colorPrincipal,
             child: const Icon(Icons.save)));
   }
