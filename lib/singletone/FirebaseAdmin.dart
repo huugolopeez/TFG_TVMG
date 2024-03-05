@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tfg_tvmg/firestoreObjects/FbAnimes.dart';
 import 'package:tfg_tvmg/firestoreObjects/FbMangas.dart';
+import 'package:tfg_tvmg/firestoreObjects/FbUsuario.dart';
 
 import 'DataHolder.dart';
 
@@ -64,5 +65,16 @@ class FirebaseAdmin {
         .collection('Mangas');
 
     mangaCollection.doc('${manga.id}').set(manga.toFirestore());
+  }
+
+  Future<void> updateUser(FbUsuario usuario) async {
+    String uidUser = FirebaseAuth.instance.currentUser!.uid;
+    try {
+      final userDocRef = FirebaseFirestore.instance.collection('Usuarios').doc(uidUser);
+
+      await userDocRef.update(usuario.toFirestore());
+    } catch (e) {
+      print('Error al actualizar el usuario: $e');
+    }
   }
 }

@@ -18,6 +18,7 @@ class LoginView extends StatelessWidget {
           email: tecUser.text,
           password: tecPass.text
       );
+
       Navigator.of(_context).popAndPushNamed('/splashview');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {

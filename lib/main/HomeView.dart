@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tfg_tvmg/custom/TMDrawer.dart';
 import 'package:tfg_tvmg/main/AnimesView.dart';
 import 'package:tfg_tvmg/main/MangasView.dart';
+import 'package:tfg_tvmg/main/MiPerfilView.dart';
 import 'package:tfg_tvmg/singletone/DataHolder.dart';
 
 import 'BuscadorView.dart';
@@ -18,9 +19,7 @@ class _HomeViewState extends State<HomeView> {
     AnimesView(),
     MangasView(),
     BuscadorView(),
-    const Text(
-      'Index 3: dsa',
-    ),
+    MiPerfilView()
   ];
 
   void vistaMenu(int numMenu) {

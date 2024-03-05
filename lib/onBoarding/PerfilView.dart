@@ -10,7 +10,7 @@ class PerfilView extends StatelessWidget {
 
   Future<void> onClickAceptar() async {
     FirebaseFirestore db = FirebaseFirestore.instance;
-    FbUsuario usuario = FbUsuario(username: tecUser.text, seguidores: 0, seguidos: 0);
+    FbUsuario usuario = FbUsuario(username: tecUser.text, seguidores: 0, seguidos: 0, urlPerfil: "https://static.vecteezy.com/system/resources/previews/002/318/271/non_2x/user-profile-icon-free-vector.jpg");
 
     String uidUser = FirebaseAuth.instance.currentUser!.uid;
     await db

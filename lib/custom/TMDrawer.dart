@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:tfg_tvmg/firestoreObjects/FbUsuario.dart';
 import 'package:tfg_tvmg/singletone/DataHolder.dart';
 
-class TMDrawer extends StatelessWidget {
+class TMDrawer extends StatefulWidget {
   final Function(int indice)? onItemTap;
 
   const TMDrawer({super.key, required this.onItemTap});
 
+  @override
+  State<TMDrawer> createState() => _TMDrawerState();
+}
+
+class _TMDrawerState extends State<TMDrawer> {
+  late FbUsuario usuario;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    usuario = DataHolder().selectedUser;
+  }
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -16,12 +30,12 @@ class TMDrawer extends StatelessWidget {
               child: Column(
             children: [
               Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 60, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 60, 10, 5),
                   child: Row(children: [
-                    const Padding(
-                        padding: EdgeInsets.only(right: 10),
-                        child: Icon(Icons.account_circle, color: Colors.white)),
-                    Text(DataHolder().selectedUser.username.toString(),
+                    Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Image(image: NetworkImage(usuario.urlPerfil), height: 40)),
+                    Text(usuario.username.toString(),
                         style: const TextStyle(color: Colors.white))
                   ])),
               Padding(
@@ -30,9 +44,9 @@ class TMDrawer extends StatelessWidget {
                     Padding(
                         padding: const EdgeInsets.only(right: 10),
                         child: Text(
-                            '${DataHolder().selectedUser.seguidores} seguidores',
+                            '${usuario.seguidores} seguidores',
                             style: const TextStyle(color: Colors.white))),
-                    Text('${DataHolder().selectedUser.seguidos} seguidos',
+                    Text('${usuario.seguidos} seguidos',
                         style: const TextStyle(color: Colors.white))
                   ]))
             ],
@@ -41,7 +55,7 @@ class TMDrawer extends StatelessWidget {
             leading: const Icon(Icons.tv, color: Colors.white),
             selectedColor: DataHolder().colorPrincipal,
             onTap: () {
-              onItemTap!(0);
+              widget.onItemTap!(0);
             },
             title: const Text(
               'Mis Animes',
@@ -52,7 +66,7 @@ class TMDrawer extends StatelessWidget {
             leading: const Icon(Icons.book, color: Colors.white),
             selectedColor: DataHolder().colorPrincipal,
             onTap: () {
-              onItemTap!(1);
+              widget.onItemTap!(1);
             },
             title: const Text(
               'Mis Mangas',
@@ -63,7 +77,7 @@ class TMDrawer extends StatelessWidget {
             leading: const Icon(Icons.search, color: Colors.white),
             selectedColor: DataHolder().colorPrincipal,
             onTap: () {
-              onItemTap!(2);
+              widget.onItemTap!(2);
             },
             title: const Text(
               'Buscador',
@@ -74,7 +88,7 @@ class TMDrawer extends StatelessWidget {
             leading: const Icon(Icons.account_circle, color: Colors.white),
             selectedColor: DataHolder().colorPrincipal,
             onTap: () {
-              onItemTap!(3);
+              widget.onItemTap!(3);
             },
             title: const Text(
               'Mi perfil',

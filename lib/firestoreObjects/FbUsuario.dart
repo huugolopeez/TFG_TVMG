@@ -5,11 +5,13 @@ class FbUsuario {
   final String username;
   final int seguidores;
   final int seguidos;
+  final String urlPerfil;
 
   FbUsuario({
     required this.username,
     required this.seguidores,
-    required this.seguidos
+    required this.seguidos,
+    required this.urlPerfil
   });
 
   factory FbUsuario.fromFirestore(
@@ -20,7 +22,8 @@ class FbUsuario {
     return FbUsuario(
         username: data?['username'],
         seguidores: data?['seguidores'],
-        seguidos: data?['seguidos']
+        seguidos: data?['seguidos'],
+        urlPerfil: data?['urlPerfil']
     );
   }
 
@@ -28,7 +31,8 @@ class FbUsuario {
     return {
       if (username != null) "username" : username,
       if (seguidores != null) "seguidores" : seguidores,
-      if (seguidos != null) "seguidos" : seguidos
+      if (seguidos != null) "seguidos" : seguidos,
+      if (urlPerfil != null) "urlPerfil" : urlPerfil
     };
   }
 }

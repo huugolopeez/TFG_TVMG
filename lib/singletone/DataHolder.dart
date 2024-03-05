@@ -46,6 +46,7 @@ class DataHolder {
     prefs.setString('userName', selectedUser.username);
     prefs.setInt('userSeguidores', selectedUser.seguidores);
     prefs.setInt('userSeguidos', selectedUser.seguidos);
+    prefs.setString('userPerfil', selectedUser.urlPerfil);
   }
 
   void loadCacheFbUser() async {
@@ -54,11 +55,13 @@ class DataHolder {
     String? userName = prefs.getString('userName');
     int? userSeguidores = prefs.getInt('userSeguidores');
     int? userSeguidos = prefs.getInt('userSeguidos');
+    String? userPerfil = prefs.getString('userPerfil');
 
     userName ??= '';
     userSeguidores ??= 0;
     userSeguidos ??= 0;
+    userPerfil ??= 'https://static.vecteezy.com/system/resources/previews/002/318/271/non_2x/user-profile-icon-free-vector.jpg';
 
-    selectedUser = FbUsuario(username: userName, seguidores: userSeguidores, seguidos: userSeguidos);
+    selectedUser = FbUsuario(username: userName, seguidores: userSeguidores, seguidos: userSeguidos, urlPerfil: userPerfil);
   }
 }
