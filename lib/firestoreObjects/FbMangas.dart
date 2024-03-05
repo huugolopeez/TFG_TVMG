@@ -17,23 +17,32 @@ class FbMangas {
       {required this.id,
       required this.titulo,
       required this.urlImagen,
-        this.descripcion,
-        this.estatus,
-        this.capitulos,
-        this.fechaPublicacion,
-        this.tipo,
-        this.volumenes,
-        this.puntuacion,
-        this.autor});
+      this.descripcion,
+      this.estatus,
+      this.capitulos,
+      this.fechaPublicacion,
+      this.tipo,
+      this.volumenes,
+      this.puntuacion,
+      this.autor});
 
   factory FbMangas.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> snapshot,
       SnapshotOptions? options) {
     final data = snapshot.data();
     return FbMangas(
-        id: data?['id'],
-        titulo: data?['titulo'],
-        urlImagen: data?['urlImagen']);
+      id: data?['id'],
+      titulo: data?['titulo'],
+      urlImagen: data?['urlImagen'],
+      descripcion: data?['descripcion'],
+      estatus: data?['estatus'],
+      capitulos: data?['capitulos'],
+      fechaPublicacion: data?['fechaPublicacion'],
+      tipo: data?['tipo'],
+      volumenes: data?['volumenes'],
+      puntuacion: data?['puntuacion'],
+      autor: data?['autor'],
+    );
   }
 
   Map<String, dynamic> toFirestore() {

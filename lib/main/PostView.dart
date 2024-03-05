@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:tfg_tvmg/firestoreObjects/FbAnimes.dart';
 import 'package:tfg_tvmg/singletone/DataHolder.dart';
@@ -40,9 +41,13 @@ class _PostViewState extends State<PostView> {
                       Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 20),
-                          child: Image(
+                          child: kIsWeb
+                      ? Image(
                               image: NetworkImage(
-                                  DataHolder().selectedAnime.urlImagen))),
+                                  DataHolder().selectedAnime.urlImagen))
+                      : Image(
+                              image: NetworkImage(
+                                  DataHolder().selectedAnime.urlImagen), height: 200)),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -79,7 +84,7 @@ class _PostViewState extends State<PostView> {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: Text(
-                                'Fecha publicacion: ${DataHolder().selectedAnime.fechaPublicacion}',
+                                'Publicacion: ${DataHolder().selectedAnime.fechaPublicacion?.substring(0, 10)}',
                                 style: const TextStyle(
                                     fontSize: 15, color: Colors.white)),
                           ),
@@ -122,9 +127,13 @@ class _PostViewState extends State<PostView> {
                       Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 20),
-                          child: Image(
+                          child: kIsWeb
+                              ? Image(
                               image: NetworkImage(
-                                  DataHolder().selectedManga.urlImagen))),
+                                  DataHolder().selectedManga.urlImagen))
+                              : Image(
+                              image: NetworkImage(
+                                  DataHolder().selectedManga.urlImagen), height: 200)),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -168,7 +177,7 @@ class _PostViewState extends State<PostView> {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: Text(
-                                'Fecha publicacion: ${DataHolder().selectedManga.fechaPublicacion}',
+                                'Publicacion: ${DataHolder().selectedManga.fechaPublicacion?.substring(0, 10)}',
                                 style: const TextStyle(
                                     fontSize: 15, color: Colors.white)),
                           ),

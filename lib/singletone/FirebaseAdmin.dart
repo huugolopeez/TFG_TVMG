@@ -25,6 +25,25 @@ class FirebaseAdmin {
     return animes;
   }
 
+  Future<List<FbMangas>> getMangas() async {
+    List<FbMangas> mangas = [];
+    String uidUser = FirebaseAuth.instance.currentUser!.uid;
+
+    QuerySnapshot<Map<String, dynamic>> animeCollection = await DataHolder()
+        .db
+        .collection('MangaList')
+        .doc(uidUser)
+        .collection('Mangas')
+        .get();
+
+    animeCollection.docs.forEach((element) {
+      FbMangas manga = FbMangas.fromFirestore(element, null);
+      mangas.add(manga);
+    });
+
+    return mangas;
+  }
+
   void insertUserAnime(FbAnimes anime) {
     String uidUser = FirebaseAuth.instance.currentUser!.uid;
     CollectionReference animeCollection = DataHolder()

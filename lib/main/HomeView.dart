@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tfg_tvmg/custom/TMDrawer.dart';
 import 'package:tfg_tvmg/main/AnimesView.dart';
+import 'package:tfg_tvmg/main/MangasView.dart';
 import 'package:tfg_tvmg/singletone/DataHolder.dart';
 
 import 'BuscadorView.dart';
@@ -15,9 +16,7 @@ class _HomeViewState extends State<HomeView> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     AnimesView(),
-    const Text(
-      'Index 1: Business',
-    ),
+    MangasView(),
     BuscadorView(),
     const Text(
       'Index 3: dsa',

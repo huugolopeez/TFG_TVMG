@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:tfg_tvmg/custom/TMGrid.dart';
 import 'package:tfg_tvmg/firestoreObjects/FbAnimes.dart';
@@ -78,7 +79,7 @@ class _BuscadorViewState extends State<BuscadorView> {
                             padding: const EdgeInsets.all(20),
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 4,
+                              crossAxisCount: kIsWeb ? 4 : 2,
                               mainAxisExtent: 400,
                             ),
                             itemCount: _busquedaAnimes.length,
@@ -95,8 +96,8 @@ class _BuscadorViewState extends State<BuscadorView> {
                         child: GridView.builder(
                             padding: const EdgeInsets.all(20),
                             gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 4,
+                                 const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: kIsWeb ? 4 : 2,
                               mainAxisExtent: 400,
                             ),
                             itemCount: _busquedaMangas.length,
