@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tfg_tvmg/main/HomeView.dart';
-import 'package:tfg_tvmg/main/PostView.dart';
 import 'package:tfg_tvmg/onBoarding/LoginView.dart';
 import 'package:tfg_tvmg/onBoarding/PerfilView.dart';
+import 'package:tfg_tvmg/onBoarding/PhoneLoginView.dart';
 import 'package:tfg_tvmg/onBoarding/RegisterView.dart';
 import 'package:tfg_tvmg/splash/SplashView.dart';
 
@@ -20,6 +20,7 @@ class TVMG extends StatelessWidget {
           '/accountview': (context) => ExistAccount(),
           '/loginview': (context) => LoginView(),
           '/registerview': (context) => RegisterView(),
+          '/phoneloginview': (context) => PhoneLoginView(),
           '/splashview': (context) => SplashView(),
           '/perfilview': (context) => PerfilView(),
           '/homeview': (context) => HomeView()
