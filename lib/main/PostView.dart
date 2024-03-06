@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:tfg_tvmg/firestoreObjects/FbAnimes.dart';
 import 'package:tfg_tvmg/singletone/DataHolder.dart';
 
 class PostView extends StatefulWidget {
@@ -13,6 +12,7 @@ class PostView extends StatefulWidget {
 }
 
 class _PostViewState extends State<PostView> {
+
   @override
   void initState() {
     super.initState();
@@ -42,12 +42,13 @@ class _PostViewState extends State<PostView> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 20),
                           child: kIsWeb
-                      ? Image(
-                              image: NetworkImage(
-                                  DataHolder().selectedAnime.urlImagen))
-                      : Image(
-                              image: NetworkImage(
-                                  DataHolder().selectedAnime.urlImagen), height: 200)),
+                              ? Image(
+                                  image: NetworkImage(
+                                      DataHolder().selectedAnime.urlImagen))
+                              : Image(
+                                  image: NetworkImage(
+                                      DataHolder().selectedAnime.urlImagen),
+                                  height: 200)),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -129,11 +130,12 @@ class _PostViewState extends State<PostView> {
                               horizontal: 20, vertical: 20),
                           child: kIsWeb
                               ? Image(
-                              image: NetworkImage(
-                                  DataHolder().selectedManga.urlImagen))
+                                  image: NetworkImage(
+                                      DataHolder().selectedManga.urlImagen))
                               : Image(
-                              image: NetworkImage(
-                                  DataHolder().selectedManga.urlImagen), height: 200)),
+                                  image: NetworkImage(
+                                      DataHolder().selectedManga.urlImagen),
+                                  height: 200)),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -204,12 +206,17 @@ class _PostViewState extends State<PostView> {
               ),
         floatingActionButton: FloatingActionButton(
             onPressed: () {
-              if(widget.isAnime) {
-                DataHolder().firebaseAdmin.insertUserAnime(DataHolder().selectedAnime);
-              } else {
-                DataHolder().firebaseAdmin.insertUserManga(DataHolder().selectedManga);
-              }
-              },
+                // Si el elemento no está insertado, agrégalo
+                if (widget.isAnime) {
+                  DataHolder()
+                      .firebaseAdmin
+                      .insertUserAnime(DataHolder().selectedAnime);
+                } else {
+                  DataHolder()
+                      .firebaseAdmin
+                      .insertUserManga(DataHolder().selectedManga);
+                }
+            },
             backgroundColor: DataHolder().colorPrincipal,
             child: const Icon(Icons.save)));
   }

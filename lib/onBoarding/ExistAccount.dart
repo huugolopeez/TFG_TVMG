@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:tfg_tvmg/singletone/DataHolder.dart';
 
 class ExistAccount extends StatelessWidget {
-
   late BuildContext _context;
 
   void onClickLogin() {
@@ -30,17 +29,16 @@ class ExistAccount extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                 child: ConstrainedBox(
-                    constraints:
-                        kIsWeb
-                    ? const BoxConstraints.tightFor(width: 150, height: 50)
-                    : const BoxConstraints.tightFor(width: 100, height: 50),
+                    constraints: kIsWeb
+                        ? const BoxConstraints.tightFor(width: 150, height: 50)
+                        : const BoxConstraints.tightFor(width: 100, height: 50),
                     child: ElevatedButton(
                       onPressed: onClickLogin,
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
                               DataHolder().colorFondo),
-                          side: MaterialStateProperty.all(BorderSide(
-                              color: DataHolder().colorPrincipal)),
+                          side: MaterialStateProperty.all(
+                              BorderSide(color: DataHolder().colorPrincipal)),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
@@ -51,8 +49,7 @@ class ExistAccount extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               child: ConstrainedBox(
-                constraints:
-                kIsWeb
+                constraints: kIsWeb
                     ? const BoxConstraints.tightFor(width: 150, height: 50)
                     : const BoxConstraints.tightFor(width: 100, height: 50),
                 child: ElevatedButton(
@@ -68,23 +65,19 @@ class ExistAccount extends StatelessWidget {
               ),
             ),
             if (!kIsWeb)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                child: ConstrainedBox(
-                  constraints:
-                  kIsWeb
-                      ? const BoxConstraints.tightFor(width: 150, height: 50)
-                      : const BoxConstraints.tightFor(width: 100, height: 50),
-                  child: ElevatedButton(
-                    onPressed: onClickSms,
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            DataHolder().colorPrincipal),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)))),
-                    child: const Text('REGISTRO SMS', textAlign: TextAlign.center),
-                  ),
+              ConstrainedBox(
+                constraints:
+                    const BoxConstraints.tightFor(width: 100, height: 50),
+                child: ElevatedButton(
+                  onPressed: onClickSms,
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          DataHolder().colorPrincipal),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)))),
+                  child:
+                      const Text('REGISTRO SMS', textAlign: TextAlign.center),
                 ),
               ),
           ],

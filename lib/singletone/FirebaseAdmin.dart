@@ -70,7 +70,8 @@ class FirebaseAdmin {
   Future<void> updateUser(FbUsuario usuario) async {
     String uidUser = FirebaseAuth.instance.currentUser!.uid;
     try {
-      final userDocRef = FirebaseFirestore.instance.collection('Usuarios').doc(uidUser);
+      final userDocRef =
+          FirebaseFirestore.instance.collection('Usuarios').doc(uidUser);
 
       await userDocRef.update(usuario.toFirestore());
     } catch (e) {
